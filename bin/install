@@ -32,9 +32,6 @@ function install_ocaml() {
   echo "∗ Installing..."
   make install >/dev/null
 
-  echo "∗ Cleaning..."
-  make clean >/dev/null
-
   echo
   echo "=================================================="
   echo "OCaml $version has been installed!"
