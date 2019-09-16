@@ -4,6 +4,10 @@ OCaml plugin for ASDF version manager
 </div>
 <hr />
 
+[![Main workflow](https://github.com/asdf-ocaml/asdf-ocaml/workflows/Main%20workflow/badge.svg)](https://github.com/asdf-ocaml/asdf-ocaml/actions)
+[![License](https://img.shields.io/github/license/asdf-ocaml/asdf-ocaml?color=brightgreen)](https://github.com/asdf-ocaml/asdf-ocaml/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
 ## Prerequirements
 
 - All environments require `curl`, `git` and `tar`.
