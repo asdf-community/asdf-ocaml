@@ -3,8 +3,9 @@ name: Main workflow
 on: [push]
 
 jobs:
-  build:
+  shellcheck:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -12,12 +13,26 @@ jobs:
       - name: Run Shellcheck
         run: shellcheck bin/*
 
-      - name: Install asdf
-        run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+        ocaml: [4.00.0, 4.04.0, 4.08.0]
 
-      - name: Run test
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install asdf
+        run: |
+          git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+
+      - name: Install OCaml and run test
         run: |
           . $HOME/asdf/asdf.sh
-          asdf plugin-test ocaml $GITHUB_WORKSPACE 'ocaml -version'
-        env:
-          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          asdf plugin-add ocaml $GITHUB_WORKSPACE
+          asdf install ocaml ${{ matrix.ocaml }}
+          asdf global ocaml ${{ matrix.ocaml }}
+          ocaml -version
