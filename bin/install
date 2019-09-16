@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+function install_ocaml() {
+  local install_type=$1
+  local version=$2
+  local install_path=$3
+
+  local download_url="https://github.com/ocaml/ocaml/archive/${version}.tar.gz"
+  local tmp_download_dir=$(mktemp -d -t ocaml_build_XXXXXX)
+  local file_name="ocaml-${version}.tar.gz"
+
+  local source_path="$tmp_download_dir/$file_name"
+  local distination="$tmp_download_dir/dist"
+
+  echo "∗ Downloading OCaml source..."
+  curl --silent --location --output $source_path -C - $download_url
+
+  (
+    mkdir -p $distination
+    tar zxf $source_path -C $distination --strip-components=1
+    cd $distination
+    echo "∗ Configuring..."
+    ./configure --prefix=$install_path >/dev/null
+    echo "∗ Compiling..."
+    make world &>log.world
+    echo "∗ Installing..."
+    make install >/dev/null
+    echo "∗ Cleaning..."
+    make clean >/dev/null
+    echo
+    echo "=================================================="
+    echo "OCaml $version has been installed!"
+    echo "--------------------------------------------------"
+    echo "Activate globally with:"
+    echo
+    echo "$ asdf global ocaml $version"
+    echo "--------------------------------------------------"
+    echo "Activate locally in the current folder with:"
+    echo
+    echo "$ asdf local ocaml $version"
+    echo "=================================================="
+    echo
+  ) || (
+    rm -rf $install_path
+    exit 1
+  )
+
+  rm -rf $tmp_download_dir
+}
+
+install_ocaml $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
