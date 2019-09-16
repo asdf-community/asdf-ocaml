@@ -19,7 +19,12 @@ function install_ocaml() {
   cd $distination
 
   echo "∗ Configuring..."
-  ./configure --prefix=$install_path >/dev/null
+  converted_version=$(echo $version | tr -d .)
+  if [ $converted_version -ge 4080 ]; then
+    ./configure --prefix=$install_path >/dev/null
+  else
+    ./configure -prefix $install_path >/dev/null
+  fi
 
   echo "∗ Compiling..."
   make world.opt &>log.world
