@@ -22,7 +22,7 @@ function install_ocaml() {
     echo "∗ Configuring..."
     ./configure --prefix=$install_path >/dev/null
     echo "∗ Compiling..."
-    make world &>log.world
+    make world.opt &>log.world
     echo "∗ Installing..."
     make install >/dev/null
     echo "∗ Cleaning..."
