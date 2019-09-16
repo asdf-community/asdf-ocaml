@@ -1,0 +1,23 @@
+name: Main workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Run Shellcheck
+        run: shellcheck bin/*
+
+      - name: Install asdf
+        run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+
+      - name: Run test
+        run: |
+          . $HOME/asdf/asdf.sh
+          asdf plugin-test ocaml $GITHUB_WORKSPACE 'ocaml -version'
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
