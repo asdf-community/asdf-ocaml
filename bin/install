@@ -14,36 +14,35 @@ function install_ocaml() {
 
   echo "∗ Downloading OCaml source..."
   curl --silent --location --output $source_path -C - $download_url
+  mkdir -p $distination
+  tar zxf $source_path -C $distination --strip-components=1
+  cd $distination
 
-  (
-    mkdir -p $distination
-    tar zxf $source_path -C $distination --strip-components=1
-    cd $distination
-    echo "∗ Configuring..."
-    ./configure --prefix=$install_path >/dev/null
-    echo "∗ Compiling..."
-    make world.opt &>log.world
-    echo "∗ Installing..."
-    make install >/dev/null
-    echo "∗ Cleaning..."
-    make clean >/dev/null
-    echo
-    echo "=================================================="
-    echo "OCaml $version has been installed!"
-    echo "--------------------------------------------------"
-    echo "Activate globally with:"
-    echo
-    echo "$ asdf global ocaml $version"
-    echo "--------------------------------------------------"
-    echo "Activate locally in the current folder with:"
-    echo
-    echo "$ asdf local ocaml $version"
-    echo "=================================================="
-    echo
-  ) || (
-    rm -rf $install_path
-    exit 1
-  )
+  echo "∗ Configuring..."
+  ./configure --prefix=$install_path >/dev/null
+
+  echo "∗ Compiling..."
+  make world.opt &>log.world
+
+  echo "∗ Installing..."
+  make install >/dev/null
+
+  echo "∗ Cleaning..."
+  make clean >/dev/null
+
+  echo
+  echo "=================================================="
+  echo "OCaml $version has been installed!"
+  echo "--------------------------------------------------"
+  echo "Activate globally with:"
+  echo
+  echo "$ asdf global ocaml $version"
+  echo "--------------------------------------------------"
+  echo "Activate locally in the current folder with:"
+  echo
+  echo "$ asdf local ocaml $version"
+  echo "=================================================="
+  echo
 
   rm -rf $tmp_download_dir
 }
