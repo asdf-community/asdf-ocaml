@@ -10,7 +10,7 @@ OCaml plugin for ASDF version manager
 
 ## Prerequirements
 
-- All environments require `curl`, `git` and `tar`.
+- All environments require `curl`, `git`, `tar` and C++ compiler.
 
 - The GNU C Compiler (gcc) is recommended, as the bytecode interpreter takes
   advantage of GCC-specific features to enhance performance. gcc is the standard
