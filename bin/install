@@ -48,6 +48,12 @@ function install_ocaml() {
     echo "=================================================="
     echo
   ) || (
+    echo
+    echo "=================================================="
+    echo "An error occurred!"
+    echo "(Temporary files and directory have been cleaned.)"
+    echo "=================================================="
+    echo
     rm -rf $install_path
     exit 1
   )
