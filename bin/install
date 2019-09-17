@@ -13,39 +13,44 @@ function install_ocaml() {
   local source_path="$tmp_download_dir/$file_name"
   local distination="$tmp_download_dir/dist"
 
-  echo "∗ Downloading OCaml source..."
-  curl --silent --location --output "$source_path" -C - "$download_url"
-  mkdir -p "$distination"
-  tar zxf "$source_path" -C "$distination" --strip-components=1
-  cd "$distination" || exit
+  (
+    echo "∗ Downloading OCaml source..."
+    curl --silent --location --output "$source_path" -C - "$download_url"
+    mkdir -p "$distination"
+    tar zxf "$source_path" -C "$distination" --strip-components=1
+    cd "$distination"
 
-  echo "∗ Configuring..."
-  converted_version=$(echo "$version" | tr -d .)
-  if [ "$converted_version" -ge 4080 ]; then
-    ./configure --prefix="$install_path" >/dev/null
-  else
-    ./configure -prefix "$install_path" >/dev/null
-  fi
+    echo "∗ Configuring..."
+    converted_version=$(echo "$version" | tr -d .)
+    if [ "$converted_version" -ge 4080 ]; then
+      ./configure --prefix="$install_path" >/dev/null || exit 1
+    else
+      ./configure -prefix "$install_path" >/dev/null || exit 1
+    fi
 
-  echo "∗ Compiling..."
-  make world.opt &>log.world
+    echo "∗ Compiling..."
+    make world.opt &>log.world
 
-  echo "∗ Installing..."
-  make install >/dev/null
+    echo "∗ Installing..."
+    make install >/dev/null || exit 1
 
-  echo
-  echo "=================================================="
-  echo "OCaml $version has been installed!"
-  echo "--------------------------------------------------"
-  echo "Activate globally with:"
-  echo
-  echo "$ asdf global ocaml $version"
-  echo "--------------------------------------------------"
-  echo "Activate locally in the current folder with:"
-  echo
-  echo "$ asdf local ocaml $version"
-  echo "=================================================="
-  echo
+    echo
+    echo "=================================================="
+    echo "OCaml $version has been installed!"
+    echo "--------------------------------------------------"
+    echo "Activate globally with:"
+    echo
+    echo "$ asdf global ocaml $version"
+    echo "--------------------------------------------------"
+    echo "Activate locally in the current folder with:"
+    echo
+    echo "$ asdf local ocaml $version"
+    echo "=================================================="
+    echo
+  ) || (
+    rm -rf $install_path
+    exit 1
+  )
 
   rm -rf "$tmp_download_dir"
 }
