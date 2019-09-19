@@ -5,8 +5,10 @@ OCaml plugin for ASDF version manager
 <hr />
 
 [![Main workflow](https://github.com/asdf-ocaml/asdf-ocaml/workflows/Main%20workflow/badge.svg)](https://github.com/asdf-ocaml/asdf-ocaml/actions)
-[![License](https://img.shields.io/github/license/asdf-ocaml/asdf-ocaml?color=brightgreen)](https://github.com/asdf-ocaml/asdf-ocaml/blob/master/LICENSE)
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/asdf-ocaml/asdf-ocaml.svg)](https://isitmaintained.com/project/asdf-ocaml/asdf-ocaml "Average time to resolve an issue")
+[![Percentage of issues still open](https://isitmaintained.com/badge/open/asdf-ocaml/asdf-ocaml.svg)](https://isitmaintained.com/project/asdf-ocaml/asdf-ocaml "Percentage of issues still open")
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![License](https://img.shields.io/github/license/asdf-ocaml/asdf-ocaml?color=brightgreen)](https://github.com/asdf-ocaml/asdf-ocaml/blob/master/LICENSE)
 
 ## Prerequirements
 
