@@ -15,6 +15,13 @@
 # limitations under the License.
 #
 
+set -eo pipefail
+
+function fail() {
+  echo -e "\e[31mFail:\e[m $* 😭"
+  exit 1
+}
+
 function install_ocaml() {
   local install_type=$1
   local version=$2
@@ -23,14 +30,14 @@ function install_ocaml() {
   local download_url="https://github.com/ocaml/ocaml/archive/${version}.tar.gz"
   local file_name="ocaml-${version}.tar.gz"
   local tmp_download_dir
-  tmp_download_dir=$(mktemp -d -t ocaml_build_XXXXXX)
+  tmp_download_dir=$(mktemp -d -t ocaml_tmp_XXXXXX)
 
-  local source_path="$tmp_download_dir/$file_name"
-  local distination="$tmp_download_dir/dist"
+  local source_path="${tmp_download_dir}/${file_name}"
+  local distination="${tmp_download_dir}/dist"
 
   (
     echo "∗ Downloading OCaml source..."
-    curl --silent --location --output "$source_path" -C - "$download_url"
+    curl --silent --location --output "$source_path" -C - "$download_url" || fail "Could not download OCaml $version source"
     mkdir -p "$distination"
     tar zxf "$source_path" -C "$distination" --strip-components=1
     cd "$distination"
@@ -38,16 +45,16 @@ function install_ocaml() {
     echo "∗ Configuring..."
     converted_version=$(echo "$version" | tr -d .)
     if [ "$converted_version" -ge 4080 ]; then
-      ./configure --prefix="$install_path" >/dev/null || exit 1
+      ./configure --prefix="$install_path" >/dev/null || fail "Could not configure"
     else
-      ./configure -prefix "$install_path" >/dev/null || exit 1
+      ./configure -prefix "$install_path" >/dev/null || fail "Could not configure"
     fi
 
     echo "∗ Compiling..."
-    make world.opt &>log.world
+    make world.opt &>log.world || fail "Could not compile"
 
     echo "∗ Installing..."
-    make install >/dev/null || exit 1
+    make install >/dev/null || fail "Could not install"
 
     echo
     echo "=================================================="
@@ -63,14 +70,8 @@ function install_ocaml() {
     echo "=================================================="
     echo
   ) || (
-    echo
-    echo "=================================================="
-    echo "An error occurred!"
-    echo "(Temporary files and directory have been cleaned.)"
-    echo "=================================================="
-    echo
     rm -rf $install_path
-    exit 1
+    fail "An error occurred"
   )
 
   rm -rf "$tmp_download_dir"
