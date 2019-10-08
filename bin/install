@@ -56,19 +56,7 @@ function install_ocaml() {
     echo "∗ Installing..."
     make install >/dev/null || fail "Could not install"
 
-    echo
-    echo "=================================================="
-    echo "OCaml $version has been installed!"
-    echo "--------------------------------------------------"
-    echo "Activate globally with:"
-    echo
-    echo "$ asdf global ocaml $version"
-    echo "--------------------------------------------------"
-    echo "Activate locally in the current folder with:"
-    echo
-    echo "$ asdf local ocaml $version"
-    echo "=================================================="
-    echo
+    echo "The installation was successful!"
   ) || (
     rm -rf $install_path
     fail "An error occurred"
