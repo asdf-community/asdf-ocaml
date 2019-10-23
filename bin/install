@@ -27,20 +27,24 @@ function install_ocaml() {
   local version=$2
   local install_path=$3
 
+  if [ "$install_type" != "version" ]; then
+    fail "asdf-ocaml supports release installs only."
+  fi
+
   local download_url="https://github.com/ocaml/ocaml/archive/${version}.tar.gz"
   local file_name="ocaml-${version}.tar.gz"
   local tmp_download_dir
   tmp_download_dir=$(mktemp -d -t ocaml_tmp_XXXXXX)
 
   local source_path="${tmp_download_dir}/${file_name}"
-  local distination="${tmp_download_dir}/dist"
+  local distination_path="${tmp_download_dir}/dist"
 
   (
     echo "∗ Downloading OCaml source..."
     curl --silent --location --output "$source_path" -C - "$download_url" || fail "Could not download OCaml $version source"
-    mkdir -p "$distination"
-    tar zxf "$source_path" -C "$distination" --strip-components=1
-    cd "$distination"
+    mkdir -p "$distination_path"
+    tar zxf "$source_path" -C "$distination_path" --strip-components=1
+    cd "$distination_path"
 
     echo "∗ Configuring..."
     converted_version=$(echo "$version" | tr -d .)
@@ -56,13 +60,13 @@ function install_ocaml() {
     echo "∗ Installing..."
     make install >/dev/null || fail "Could not install"
 
+    rm -rf "$tmp_download_dir"
+
     echo "The installation was successful!"
   ) || (
-    rm -rf $install_path
+    rm -rf "$install_path"
     fail "An error occurred"
   )
-
-  rm -rf "$tmp_download_dir"
 }
 
 install_ocaml "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
