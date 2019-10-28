@@ -1,6 +1,6 @@
 <div align="center">
 <h1>asdf-ocaml 🐫</h1>
-OCaml plugin for asdf version manager
+<span><a href="https://ocaml.org">OCaml</a> plugin for asdf version manager</span>
 </div>
 <hr />
 
