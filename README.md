@@ -5,8 +5,8 @@
 <hr />
 
 [![Main workflow](https://github.com/asdf-community/asdf-ocaml/workflows/Main%20workflow/badge.svg)](https://github.com/asdf-community/asdf-ocaml/actions)
-[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/asdf-community/asdf-ocaml.svg)](https://isitmaintained.com/project/asdf-community/asdf-ocaml 'Average time to resolve an issue')
-[![Percentage of issues still open](https://isitmaintained.com/badge/open/asdf-community/asdf-ocaml.svg)](https://isitmaintained.com/project/asdf-community/asdf-ocaml 'Percentage of issues still open')
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/asdf-community/asdf-ocaml.svg)](https://isitmaintained.com/project/asdf-community/asdf-ocaml "Average time to resolve an issue")
+[![Percentage of issues still open](https://isitmaintained.com/badge/open/asdf-community/asdf-ocaml.svg)](https://isitmaintained.com/project/asdf-community/asdf-ocaml "Percentage of issues still open")
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 [![License](https://img.shields.io/github/license/asdf-community/asdf-ocaml?color=brightgreen)](https://github.com/asdf-community/asdf-ocaml/blob/master/LICENSE)
 
