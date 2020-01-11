@@ -3,10 +3,12 @@ name: Main workflow
 on:
   push:
     paths-ignore:
-      - '**.md'
+      - "**.md"
+      - ".all-contributorsrc"
   pull_request:
     paths-ignore:
-      - '**.md'
+      - "**.md"
+      - ".all-contributorsrc"
   schedule:
     - cron: "0 0 * * 5"
 
