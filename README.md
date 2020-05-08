@@ -9,6 +9,10 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![License](https://img.shields.io/github/license/asdf-community/asdf-ocaml?style=flat-square&color=brightgreen)](https://github.com/asdf-community/asdf-ocaml/blob/master/LICENSE)
 
+**Note**: To be honest, the use of this plugin is **NOT** recommended. It's
+definitely better to use opam to manage your environment. We recommend using
+opam unless you use it for a specific reason or for a specific purpose.
+
 ## Prerequirements
 
 - Make sure you have the required dependencies installed:
@@ -64,6 +68,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
