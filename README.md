@@ -2,13 +2,13 @@
 
 [OCaml](https://ocaml.org) plugin for asdf version manager
 
-## Build History
-
-[![Build history](https://buildstats.info/github/chart/asdf-community/asdf-ocaml?branch=master)](https://github.com/asdf-community/asdf-ocaml/actions)
-
 **Note**: To be honest, the use of this plugin is **NOT** recommended. It's
 definitely better to use opam to manage your environment. We recommend using
 opam unless you use it for a specific reason or for a specific purpose.
+
+## Build History
+
+[![Build history](https://buildstats.info/github/chart/asdf-community/asdf-ocaml?branch=master)](https://github.com/asdf-community/asdf-ocaml/actions)
 
 ## Prerequirements
 
